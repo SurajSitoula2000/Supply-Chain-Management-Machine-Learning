@@ -8,7 +8,6 @@
 # First, import the coutry code to continent map for my location functions
 import pandas as pd
 import os
-#path = os.curdir+"\Data\Source\\"
 ct_df = pd.read_csv("C:/Users/lenovo/Desktop/SupplyChainDataset/country_code_to_continent_map.csv")
 CONTINENT_DICT = {x:y for x,y in zip(ct_df.country,ct_df.continent)}
 
@@ -259,7 +258,6 @@ def generate_country_stability_features():
     # From fragile state data (FundForPeace)
     # Read in the files 
     import os
-    #path = os.curdir+'\Data\Source\\'
     fsi_n = ['fsi-2006.xlsx','fsi-2007.xlsx','fsi-2008.xlsx','fsi-2009.xlsx','fsi-2010.xlsx','fsi-2011.xlsx'
     ,'fsi-2012.xlsx','fsi-2013.xlsx','fsi-2014.xlsx','fsi-2015.xlsx','fsi-2016.xlsx','fsi-2017.xlsx']
     fsi_xl = [pd.read_excel(pd.ExcelFile(f)) for f in fsi_n]
@@ -313,7 +311,6 @@ def generate_country_logistics_features():
     """
     # load the data
     import os
-    #path = os.curdir+'\Data\Source\\'
     lpi = pd.ExcelFile('C:/Users/lenovo/Desktop/SupplyChainDataset/International_LPI_from_2007_to_2016.xlsx')
 
     # iterate over dfs, pull and rename
@@ -414,7 +411,6 @@ def combine_logistics_and_stability_features(lpi_all, fsi_all):
     print("\nFSI Year Value counts: ",lpi_all.year.value_counts().sort_index())
 
     import os
-    #path = os.curdir+'\Data\Features\\'
     df_country = compare_columns(fsi_all, lpi_all,'country','country')
     df_country.to_csv('C:/Users/lenovo/Desktop/SupplyChainDataset/fsi_lpi_country comps.csv')
     # After doing data cleaning in Excel, get the resulting map
@@ -511,7 +507,6 @@ def generate_factory_location_features(main_data):
         factory.iloc[i]['origin_country'] = ctry
         factory.iloc[i]['origin_continent'] = cntnt
     import os
-    #path = os.curdir+'\Data\Features\\'
     factory.to_csv("factory_country_continent.csv")
     print("factory shape: ",factory.shape)
     factory.head()
@@ -874,7 +869,6 @@ def run_combined_classify_regress_model_prefit(data, ddate, delayed,classifier, 
     # Make DataFrame of True Positives for regression prediction (length/extent of delay) 
     df_true_pos_fin = df_pred_fin[(df_pred_fin.delayed==1) & (df_pred_fin.delayed==df_pred_fin.pred)]
     # Save to disk
-    #path = os.curdir+"\Data\Results\\"
     df_pred_fin.to_csv('C:/Users/lenovo/Desktop/SupplyChainDataset/classifier_final_predicted.csv')
     df_true_pos_fin.to_csv('C:/Users/lenovo/Desktop/SupplyChainDataset/classifier_final_true_positives.csv') # Save to data folders
     #-------------------Regression----------------#
@@ -887,4 +881,5 @@ def run_combined_classify_regress_model_prefit(data, ddate, delayed,classifier, 
     rmse = np.sqrt(mean_squared_error(y_ts_reg_fin,reg_estimator_fin.predict(X_ts_reg_fin)))
     #d_rsq_fin = pd.DataFrame([r2,rmse], columns=['r2', 'rmse'])
     return df_pred_fin, df_true_pos_fin,  d_feat_imp_clf_fin, clfreport, cmatrix, r2, rmse 
+
 
