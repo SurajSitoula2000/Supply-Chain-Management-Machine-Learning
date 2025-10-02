@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Aug  8 20:18:15 2017
-
-@author: Tichakunda Mangono
-"""
-
 # In the future, consider the following..
 # Class for datetimes already exists
 # Class for places (locations, countries, continent etc. use googlemaps!)
@@ -894,3 +887,4 @@ def run_combined_classify_regress_model_prefit(data, ddate, delayed,classifier, 
     rmse = np.sqrt(mean_squared_error(y_ts_reg_fin,reg_estimator_fin.predict(X_ts_reg_fin)))
     #d_rsq_fin = pd.DataFrame([r2,rmse], columns=['r2', 'rmse'])
     return df_pred_fin, df_true_pos_fin,  d_feat_imp_clf_fin, clfreport, cmatrix, r2, rmse 
+
